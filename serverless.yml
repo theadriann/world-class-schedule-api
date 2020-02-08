@@ -12,8 +12,8 @@ functions:
   scheduleAPI:
     handler: api/schedule.handler
     environment:
-      EMAIL: ${env:LOGIN_EMAIL}
-      PASSW: ${env:LOGIN_PASSW}
+      EMAIL: ${param:LOGIN_EMAIL}
+      PASSW: ${param:LOGIN_PASSW}
     events:
       - http:
           path: /index
