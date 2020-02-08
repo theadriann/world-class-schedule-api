@@ -18,7 +18,7 @@ class API {
 
         this.instance = axios.create({
             baseURL: "https://apiv2.upfit.biz/",
-            timeout: 1000,
+            // timeout: 1000,
             headers: {
                 accept: "application/json, text/plain, */*",
                 "content-type":
@@ -165,8 +165,6 @@ class API {
             )
         );
 
-        console.log(schedules);
-
         return _.flatten(schedules);
     }
 
@@ -178,6 +176,8 @@ class API {
             date_start,
             date_end
         });
+
+        return { clubs, schedules };
     }
 }
 
