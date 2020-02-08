@@ -1,0 +1,17 @@
+org: theadriann
+service: world-class-schedule-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+
+app: worldclass-schedule
+
+functions:
+  hello:
+    handler: index.handler
+
+events:
+  - http: ANY /
+  - http: 'ANY {proxy+}'
