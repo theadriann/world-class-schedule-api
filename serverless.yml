@@ -1,6 +1,6 @@
 org: theadriann
 service: world-class-schedule-api
-app: worldclass-schedule
+# app: worldclass-schedule
 
 provider:
   name: aws
