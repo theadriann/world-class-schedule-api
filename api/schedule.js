@@ -11,11 +11,11 @@ const DATE_FORMAT = "YYYY-MM-DD";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/index", async (req, res) => {
+app.get("/test", async (req, res) => {
     await res.send({ status: 200, data: {} });
 });
 
-app.get("/", async (req, res) => {
+app.get("/all", async (req, res) => {
     try {
         const today = moment();
 

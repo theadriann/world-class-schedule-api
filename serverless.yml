@@ -16,10 +16,10 @@ functions:
       PASSW: ${param:LOGIN_PASSW}
     events:
       - http:
-          path: /index
+          path: /test
           method: get
       - http:
-          path: /
+          path: /all
           method: get
 
 plugins:
