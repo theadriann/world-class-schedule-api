@@ -3,7 +3,6 @@ const qs = require("qs");
 const axios = require("axios");
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
-const configs = require("dotenv").config();
 
 class API {
     //
