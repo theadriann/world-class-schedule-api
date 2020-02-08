@@ -1,17 +1,24 @@
 org: theadriann
 service: world-class-schedule-api
+app: worldclass-schedule
 
 provider:
   name: aws
   runtime: nodejs12.x
   region: eu-central-1
 
-app: worldclass-schedule
 
 functions:
-  hello:
-    handler: index.handler
+  scheduleAPI:
+    handler: api/schedule.handler
+    events:
+      - http:
+          path: /index
+          method: get
 
-events:
-  - http: ANY /
-  - http: 'ANY {proxy+}'
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+# - http: ANY /
+# - http: 'ANY {proxy+}'

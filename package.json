@@ -1,16 +1,31 @@
 {
-  "name": "world-class-schedule-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "serverless-http": "^2.3.1"
-  }
+    "name": "world-class-schedule-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "serverless offline start --skipCacheInvalidation",
+        "test-schedule": "node ./services/getSchedule.js",
+        "deploy": "sls deploy -v"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.2",
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "moment-duration-format": "^2.3.2",
+        "qs": "^6.9.1",
+        "serverless-http": "^2.3.1",
+        "uuid": "^3.4.0"
+    },
+    "devDependencies": {
+        "serverless-dotenv": "^1.0.0-beta.2",
+        "serverless-dotenv-plugin": "^2.3.1",
+        "serverless-offline": "^5.12.1"
+    }
 }
