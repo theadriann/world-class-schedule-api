@@ -34,10 +34,14 @@ app.get("/all", async (req, res) => {
             date_end = date.isValid() ? date.format(DATE_FORMAT) : date_end;
         }
 
-        const schedules = await api.getAllSchedules({ date_start, date_end });
+        const { clubs, schedules } = await api.getAllSchedules({
+            date_start,
+            date_end
+        });
 
         return res.status(200).send({
-            data: schedules
+            clubs,
+            schedules
         });
     } catch (error) {
         console.log(error, "error!!");
