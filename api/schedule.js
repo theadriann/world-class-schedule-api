@@ -1,3 +1,4 @@
+const cors = require("cors");
 const moment = require("moment");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,6 +9,7 @@ const api = require("../services/getSchedule");
 
 const DATE_FORMAT = "YYYY-MM-DD";
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
