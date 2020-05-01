@@ -1,12 +1,17 @@
+// utils
 const cors = require("cors");
 const moment = require("moment");
 const express = require("express");
 const bodyParser = require("body-parser");
 const serverless = require("serverless-http");
 
-const app = express();
+// services
 const api = require("../services/getSchedule");
 
+// server
+const app = express();
+
+// defs
 const DATE_FORMAT = "YYYY-MM-DD";
 
 app.use(cors());
@@ -36,12 +41,12 @@ app.get("/all", async (req, res) => {
 
         const { clubs, schedules } = await api.getAllSchedules({
             date_start,
-            date_end
+            date_end,
         });
 
         return res.status(200).send({
             clubs,
-            schedules
+            schedules,
         });
     } catch (error) {
         console.log(error, "error!!");

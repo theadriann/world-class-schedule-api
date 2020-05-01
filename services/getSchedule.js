@@ -12,7 +12,7 @@ class API {
             auth: "authenticate.php",
             info: "member-get-dashboard-info.php",
             getClubs: "get-clubs.php",
-            getSchedule: "class-schedule.php"
+            getSchedule: "class-schedule.php",
         };
 
         this.instance = axios.create({
@@ -25,16 +25,14 @@ class API {
                 origin: "ionic://localhost",
                 "accept-language": "en-gb",
                 "user-agent":
-                    "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
-            }
+                    "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+            },
         });
 
         this.isAuthP = new Promise((resolve, reject) =>
-            this._getInfo().then(data => {
+            this._getInfo().then((data) => {
                 if (data.error && data.error[0] === "ERROR_LOGIN_MEMBER") {
-                    return this.auth()
-                        .then(resolve)
-                        .catch(reject);
+                    return this.auth().then(resolve).catch(reject);
                 }
             })
         );
@@ -45,14 +43,14 @@ class API {
         const params = qs.stringify({
             json: true,
             email: process.env.EMAIL,
-            member_password: process.env.PASSW
+            member_password: process.env.PASSW,
         });
 
         const res = await this.instance({
             method: "POST",
             url: `${this.urls.auth}?${params}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
-            data: qs.stringify(data)
+            data: qs.stringify(data),
         });
 
         try {
@@ -70,7 +68,7 @@ class API {
             method: "POST",
             url: `${this.urls.info}?${qs.stringify({ json: true })}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
-            data: qs.stringify(data)
+            data: qs.stringify(data),
         });
 
         return res.data;
@@ -90,7 +88,7 @@ class API {
             method: "POST",
             url: `${this.urls.getClubs}?${qs.stringify({ json: true })}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
-            data: qs.stringify(data)
+            data: qs.stringify(data),
         });
 
         return res.data;
@@ -104,7 +102,7 @@ class API {
             name: club.club_name,
             shortName: club.club_name.replace("World Class ", ""),
             city: club.club_city,
-            resources: _.map(_.values(club.resources), res => res.name)
+            resources: _.map(_.values(club.resources), (res) => res.name),
         }));
     }
 
@@ -116,14 +114,14 @@ class API {
             json: true,
             clubid,
             date_start,
-            date_end
+            date_end,
         });
 
         const res = await this.instance({
             method: "POST",
             url: `${this.urls.getSchedule}?${params}`,
             headers: { "content-type": "application/x-www-form-urlencoded" },
-            data: qs.stringify(data)
+            data: qs.stringify(data),
         });
 
         return res.data;
@@ -133,10 +131,10 @@ class API {
         const json = await this.getScheduleJSON({
             clubid,
             date_start,
-            date_end
+            date_end,
         });
 
-        return _.map(json.schedule, sch => {
+        return _.map(json.schedule, (sch) => {
             const end_hour = moment
                 .duration(sch.hour)
                 .add(Number(sch.duration), "minutes")
@@ -152,14 +150,14 @@ class API {
                 name: sch.name,
                 room: sch.room,
                 clubid: json.clubid,
-                trainers: sch.trainers
+                trainers: sch.trainers,
             };
         });
     }
 
     async getSchedules({ clubids, date_start, date_end }) {
         const schedules = await Promise.all(
-            clubids.map(clubid =>
+            clubids.map((clubid) =>
                 this.getSchedule({ clubid, date_start, date_end })
             )
         );
@@ -173,7 +171,7 @@ class API {
         const schedules = await this.getSchedules({
             clubids,
             date_start,
-            date_end
+            date_end,
         });
 
         return { clubs, schedules };
@@ -181,28 +179,3 @@ class API {
 }
 
 module.exports = new API();
-
-// const api = new API();
-
-// const start = async () => {
-//     const json = await api.getAllSchedules({
-//         date_start: "2020-02-08",
-//         date_end: "2020-02-08"
-//     });
-
-//     // const json = await api.getScheduleJSON({
-//     //     clubid: "455",
-//     //     date_start: "2020-02-08",
-//     //     date_end: "2020-02-09"
-//     // });
-
-//     console.log(json);
-// };
-
-// start();
-
-// // api.getSchedule({
-// //     clubid: "455",
-// //     date_start: "2020-02-07",
-// //     date_end: "2020-02-14"
-// // });
