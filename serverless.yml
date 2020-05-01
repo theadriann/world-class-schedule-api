@@ -1,6 +1,5 @@
 org: theadriann
 service: world-class-schedule-api
-# app: worldclass-schedule
 
 provider:
   name: aws
@@ -27,6 +26,3 @@ functions:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
-
-# - http: ANY /
-# - http: 'ANY {proxy+}'
