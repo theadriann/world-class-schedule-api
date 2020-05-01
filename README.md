@@ -19,3 +19,7 @@ Object {
     schedules: <Schedule>[]
 }
 ```
+
+## Todo
+
+- Cache responses
