@@ -1,11 +1,13 @@
+app: worldclass-schedule
 org: theadriann
 service: world-class-schedule-api
 
 provider:
   name: aws
+  stage: ${opt:stage, 'prod'}
+  region: ${opt:region, 'eu-central-1'}
+  profile: personal
   runtime: nodejs12.x
-  region: eu-central-1
-
 
 functions:
   scheduleAPI:
@@ -14,10 +16,6 @@ functions:
       EMAIL: ${param:LOGIN_EMAIL}
       PASSW: ${param:LOGIN_PASSW}
     events:
-      - http:
-          path: /test
-          method: get
-          cors: true
       - http:
           path: /all
           method: get
